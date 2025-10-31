@@ -20,7 +20,7 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      title: "KILOBIZZY",
+      title: "CIRKU",
       htmlAttrs: { lang: "en" },
       link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
       meta: [
@@ -28,7 +28,7 @@ export default defineNuxtConfig({
           hid: "description",
           name: "description",
           content:
-            "KILOBIZZY",
+            "CIRKU",
         },
         {
           hid: "viewport",
