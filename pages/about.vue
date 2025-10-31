@@ -1,56 +1,80 @@
 <template>
-    <div class="flex flex-col">
-        <div class="flex flex-col justify-center items-center space-y-5 mt-5">
-            <span class="footer text-[#89898B] text-center text-sm font-bold">ABOUT</span>
-            <span class="title text-4xl bg-gradient-to-r from-[#FFFFFF] to-[#4C4B4B] text-transparent bg-clip-text">Mavo</span>
+    <div class="flex flex-col pb-10">
+        <div class="flex flex-col justify-center items-center space-y-5 mt-5 px-4">
+            <span class="footer text-center text-sm font-bold">ABOUT</span>
+            <span class="title text-4xl">CIRKU</span>
             <img src="/images/star2.png" class="h-8 absolute left-10 top-20"/>
 
-                <div class="social-container">
-                    <div class="social-wrapper">
-                        <ul class="social-list">
-                            <li><a href="https://www.instagram.com/mavoswago?igsh=NTB2b3h3b2lrdHRp" class="social-link instagram">
-                                <i class="fab fa-instagram" aria-hidden="true"></i>
-                            </a></li>
-                            <li><a href="https://x.com/mavoswago?s=21" class="social-link twitter">
-                                <i class="fab fa-twitter" aria-hidden="true"></i>
-                            </a></li>
-                        </ul>
+            <div class="flex flex-col items-center space-y-6 mt-12 max-w-3xl px-4">
+                <div class="title mb-4 flex flex-col text-center text-2xl">
+                    <span>Your Circle of creation</span>
+                </div>
+                
+                <div class="text-center text-w space-y-5 max-w-2xl">
+                    <p class="text-base md:text-lg leading-relaxed">
+                        Cirku is a DIY creative experience designed to bring people together through art, craft, and self-expression. Guests create Texture Art, Rugs, and wooden works with epoxy while enjoying music, drinks, and community vibes.
+                    </p>
+                    <p class="text-base md:text-lg leading-relaxed">
+                        It blends the energy of a social hangout with the joy of making something by hand.
+                    </p>
+                </div>
+            </div>
+
+            <div class="flex flex-col items-center space-y-6 mt-12 max-w-3xl px-4">
+                <div class="title mb-5 flex flex-col text-center text-xl md:text-2xl">
+                    <span>Core Activities</span>
+                </div>
+                <div class="text-center space-y-3 text-base md:text-lg">
+                    <p>• Texture Art</p>
+                    <p>• Rug Tufting</p>
+                    <p>• Wood Works with Epoxy</p>
+                </div>
+            </div>
+
+            <div class="flex flex-col items-center space-y-6 mt-12 max-w-3xl px-4">
+                <div class="title mb-5 flex flex-col text-center text-xl md:text-2xl">
+                    <span>Why Cirku?</span>
+                </div>
+                <div class="text-left space-y-4 text-base md:text-lg max-w-xl w-full">
+                    <p><span class="font-semibold">• Unique:</span> First-of-its-kind creative lounge experience in Lagos.</p>
+                    <p><span class="font-semibold">• Social:</span> Perfect for content creation & social sharing.</p>
+                    <p><span class="font-semibold">• Take-Home Value:</span> Every guest leaves with something they made.</p>
+                    <p><span class="font-semibold">• Flexible:</span> Works for both day & night audiences.</p>
+                    <p><span class="font-semibold">• Club/Lounge Benefit:</span> Increases foot traffic, builds brand reputation.</p>
+                </div>
+            </div>
+
+            <div class="flex flex-col items-center space-y-6 mt-12 max-w-3xl px-4">
+                <div class="title mb-5 flex flex-col text-center text-xl md:text-2xl">
+                    <span>Event Details</span>
+                </div>
+                <div class="text-center space-y-5 text-base md:text-lg max-w-xl">
+                    <p class="font-semibold text-lg md:text-xl">Date: November 1, 2025</p>
+                    <div class="space-y-3 mt-6">
+                        <p class="font-semibold text-lg md:text-xl">Sessions:</p>
+                        <div class="space-y-2">
+                            <p>• Session 1 → 12–6 PM</p>
+                            <p>• Session 2 → 6–10 PM</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3 mt-6">
+                        <p class="font-semibold text-lg md:text-xl">Capacity (per session):</p>
+                        <div class="space-y-2">
+                            <p>• Texture Art: 20 guests</p>
+                            <p>• Wood works with epoxy: 20 guests</p>
+                            <p>• Rug Tufting: 10 guests</p>
+                        </div>
+                        <p class="mt-4 font-semibold"><span>Total:</span> 50 guests per session / 100 in one day</p>
                     </div>
                 </div>
+            </div>
+
                 <img src="/images/star2.png" class="h-8 absolute right-10 top-60"/>
-
-        </div>
-        <div class="flex flex-col justify-center items-center space-y-5 mt-5">
-            <img src="/images/inr.png" class="w-8" />
-            <a target="_blank" href="https://theicent.lnk.to/Kilometer-II" class="clickable-link">
-                <div
-                class="title animate-pulse bg-gradient-to-r from-[#FFFFFF] to-[#4C4B4B] mb-4 flex flex-col text-center text-transparent bg-clip-text text-3xl hover:from-[#F0F0F0] hover:to-[#6B7280] transition-all duration-300 cursor-pointer">
-                <span>Kilometer <br /> II</span>
-            </div>
-            </a>
-       
-            
-        </div>
-        <div class="flex flex-col justify-center items-center space-y-5 mt-5">
-            <img src="/images/klr.png" class="w-8" />
-            <img src="/images/star2.png" class="h-8 relative right-40 top-10"/>
-
-            <div
-                class="title bg-gradient-to-r from-[#FFFFFF] to-[#4C4B4B] mb-4 flex flex-col text-center text-transparent bg-clip-text text-3xl ">
-                <span>Cirku <br /> Parties</span>
-            </div>
-            
-                <div class="text-center">
-                    <span class=" footer text-[#89898B]">Coming soon....</span>
-
-                </div>
-                <img src="/images/star2.png" class="h-8 relative  left-20 bottom-4"/>
-
         </div>
 
 
         <footer class="text-center my-5">
-            <span class="text-xs text-center  footer-font text-[#d1cfd8]">Circle Ent. 2025</span>
+            <span class="text-xs text-center footer-font">Circle Ent. 2025</span>
         </footer>
     </div>
 </template>

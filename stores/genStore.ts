@@ -7,7 +7,8 @@ export const useUserStore = defineStore('user', () => {
       gender: '',
       insta: '',
       email: '',
-      vid: ''
+      vid: '',
+      eventType: ''
     }
   
     return { user }

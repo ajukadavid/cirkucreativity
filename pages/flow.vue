@@ -88,7 +88,8 @@ const handleLast = async () => {
                 name: store.user.name,
                 gender: store.user.gender,
                 insta: store.user.insta,
-                email: store.user.email
+                email: store.user.email,
+                eventType: store.user.eventType
             })
         
         if (error) {
@@ -146,10 +147,10 @@ const clearValidationErrors = () => {
     <div class="flex flex-col px-10 py-5 bg-black">
         <div v-show="currentStep === 1" class="flex space-y-4 flex-col">
             <div
-                class="title bg-gradient-to-r from-[#FFFFFF] to-[#4C4B4B] mb-4 flex flex-col text-center text-transparent bg-clip-text text-3xl ">
+                class="title mb-4 flex flex-col text-center text-3xl ">
                 <span>What should we call you?</span>
             </div>
-            <div class="text-center text-[#89898B] mb-2">
+            <div class="text-center mb-2">
                 <span>
                     Before we hit the road, let’s get familiar!
                 </span>
@@ -157,7 +158,7 @@ const clearValidationErrors = () => {
             <div class="w-full md:p-10">
                 <InputField class="w-full mb-4" v-model="store.user.name" placeholder="Enter full name" @input="clearValidationErrors" />
                 <!-- Validation error for step 1 -->
-                <div v-if="validationErrors.length > 0 && currentStep === 1" class="text-yellow-400 text-sm mb-4 text-center">
+                <div v-if="validationErrors.length > 0 && currentStep === 1" class="text-sm mb-4 text-center">
                     {{ validationErrors[0] }}
                 </div>
             <div class="w-full flex justify-center px-4">
@@ -165,7 +166,7 @@ const clearValidationErrors = () => {
             </div>
             </div>
           
-            <div @click="$router.push('/')" class="text-center text-[#89898B]">
+            <div @click="$router.push('/')" class="text-center">
                 <span>
                     Go back
                 </span>
@@ -173,10 +174,10 @@ const clearValidationErrors = () => {
         </div>
         <div v-show="currentStep === 2" class="flex space-y-4 flex-col">
             <div
-                class="title bg-gradient-to-r from-[#FFFFFF] to-[#4C4B4B] mb-4 flex flex-col text-center text-transparent bg-clip-text text-3xl ">
-                <span>What’s your gender?</span>
+                class="title mb-4 flex flex-col text-center text-3xl ">
+                <span>What's your gender?</span>
             </div>
-            <div class="text-center text-[#89898B] mb-2">
+            <div class="text-center mb-2">
                 <span>
                     We are asking to ensure inclusion and <br /> tailor experiences for you
                 </span>
@@ -190,10 +191,10 @@ const clearValidationErrors = () => {
         </div>
         <div v-show="currentStep === 3" class="flex space-y-4 flex-col">
             <div
-                class="title bg-gradient-to-r from-[#FFFFFF] to-[#4C4B4B] mb-4 flex flex-col text-center text-transparent bg-clip-text text-3xl ">
-                <span>What’s your handle?</span>
+                class="title mb-4 flex flex-col text-center text-3xl ">
+                <span>What's your handle?</span>
             </div>
-            <div class="text-center text-[#89898B] mb-2">
+            <div class="text-center mb-2">
                 <span>
                     We are not stalking, just getting <br /> a glimpse of your vibe
                 </span>
@@ -201,13 +202,13 @@ const clearValidationErrors = () => {
             <div class="w-full justify-center flex flex-col items-center px-4">
                 <InputField class="w-full mb-4" v-model="store.user.insta" placeholder="Your Instagram @" @input="clearValidationErrors" />
                 <!-- Validation error for step 3 -->
-                <div v-if="validationErrors.length > 0 && currentStep === 3" class="text-yellow-400 text-sm mb-4 text-center">
+                <div v-if="validationErrors.length > 0 && currentStep === 3" class="text-sm mb-4 text-center">
                     {{ validationErrors[0] }}
                 </div>
 
                 <CtaBtn @click="nextStep" text="Next" class="w-fit"/>
             </div>
-            <div @click="prevStep" class="text-center text-[#89898B]">
+            <div @click="prevStep" class="text-center">
                 <span>
                     Go back
                 </span>
@@ -216,23 +217,23 @@ const clearValidationErrors = () => {
         </div>
         <div v-show="currentStep === 4" class="flex space-y-4 flex-col">
             <div
-                class="title bg-gradient-to-r from-[#FFFFFF] to-[#4C4B4B] mb-4 flex flex-col text-center text-transparent bg-clip-text text-3xl ">
+                class="title mb-4 flex flex-col text-center text-3xl ">
                 <span>Where do we send your invite?</span>
             </div>
-            <div class="text-center text-[#89898B] mb-2">
+            <div class="text-center mb-2">
                 <span>
                     We promise, no spam, only the <br /> insider scoop!
                 </span>
             </div>
             <InputField v-model="store.user.email" placeholder="Your email address" @input="clearValidationErrors" />
             <!-- Validation error for step 4 -->
-                        <div v-if="validationErrors.length > 0 && currentStep === 4" class="text-yellow-400 text-sm mb-4 text-center">
+                        <div v-if="validationErrors.length > 0 && currentStep === 4" class="text-sm mb-4 text-center">
                 {{ validationErrors[0] }}
             </div>
             <div class="w-full justify-center flex max-w-sm px-4">
                 <CtaBtn @click="handleLast" text="Submit" />
             </div>
-            <div @click="prevStep" class="text-center text-[#89898B]">
+            <div @click="prevStep" class="text-center">
                 <span>
                     Go back
                 </span>
@@ -248,7 +249,7 @@ const clearValidationErrors = () => {
         </div>
 
         <footer class="text-center bg-transparent mt-5">
-            <span class="text-xs text-center  footer-font text-[#d1cfd8]">Circle Ent. 2025</span>
+            <span class="text-xs text-center footer-font">Circle Ent. 2025</span>
         </footer>
     </div>
 

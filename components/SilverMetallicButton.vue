@@ -93,17 +93,17 @@ const handleClick = (event) => {
 <style scoped>
 .silver-metallic-button {
   position: relative;
-  border: none;
+  border: 2px solid #000000;
   cursor: pointer;
   font-family: 'DM Sans', sans-serif;
   font-weight: 600;
   font-size: 16px;
   line-height: 24px;
   letter-spacing: -0.16px;
-  border-radius: 11px;
+  border-radius: 0;
   transition: all 0.2s ease;
-  background: linear-gradient(180deg, #D1D5DB 0%, #9CA3AF 100%);
-  box-shadow: 0px 6px 12px rgba(55, 65, 81, 0.08);
+  background: #FFFFFF;
+  box-shadow: none;
 }
 
 .silver-metallic-button:focus {
@@ -112,8 +112,8 @@ const handleClick = (event) => {
 
 .silver-metallic-button__bevel {
   position: relative;
-  border-radius: 10px;
-  background: linear-gradient(180deg, #EEEFF2 0%, #9CA3AF 84.04%, #EEEFF2 100%);
+  border-radius: 0;
+  background: #FFFFFF;
   transition: all 0.2s ease;
 }
 
@@ -123,23 +123,20 @@ const handleClick = (event) => {
   justify-content: center;
   align-items: center;
   gap: 4px;
-  border-radius: 8px;
-  background: linear-gradient(0deg, #FFFFFF 0%, #E5E7EB 100%);
-  color: #1F2937;
-  text-shadow: -0.5px 0.5px 1px rgba(3, 7, 18, 0.12);
+  border-radius: 0;
+  background: #FFFFFF;
+  color: #000000;
+  text-shadow: none;
   transition: all 0.2s ease;
 }
 
 .silver-metallic-button__text {
-  background: linear-gradient(135deg, #1F2937 29.17%, #6B7280 85.42%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: -0.5px 0.5px 1px rgba(3, 7, 18, 0.12);
+  color: #000000;
+  -webkit-text-fill-color: #000000;
 }
 
 .silver-metallic-button__icon {
-  color: #1F2937;
+  color: #000000;
   flex-shrink: 0;
 }
 
@@ -206,32 +203,32 @@ const handleClick = (event) => {
 /* State variants */
 .silver-metallic-button--hover:hover:not(:disabled),
 .silver-metallic-button--hover {
-  box-shadow: 0px 6px 12px rgba(55, 65, 81, 0.08);
+  box-shadow: none;
 }
 
 .silver-metallic-button--hover:hover:not(:disabled) .silver-metallic-button__bevel,
 .silver-metallic-button--hover .silver-metallic-button__bevel {
-  background: linear-gradient(180deg, #EEEFF2 0%, #9CA3AF 84.04%, #EEEFF2 100%);
+  background: #FFFFFF;
 }
 
 .silver-metallic-button--hover:hover:not(:disabled) .silver-metallic-button__inner,
 .silver-metallic-button--hover .silver-metallic-button__inner {
-  background: linear-gradient(0deg, #FFFFFF 0%, #E5E7EB 100%);
+  background: #FFFFFF;
 }
 
 .silver-metallic-button--focused,
 .silver-metallic-button:focus-visible {
-  background: linear-gradient(180deg, #D1D5DB 0%, #9CA3AF 100%);
+  background: #FFFFFF;
 }
 
 .silver-metallic-button--focused .silver-metallic-button__bevel,
 .silver-metallic-button:focus-visible .silver-metallic-button__bevel {
-  background: linear-gradient(180deg, #79DCA8 0%, #0E5738 50%, #79DCA8 100%);
+  background: #FFFFFF;
 }
 
 .silver-metallic-button--focused .silver-metallic-button__inner,
 .silver-metallic-button:focus-visible .silver-metallic-button__inner {
-  background: linear-gradient(0deg, #FFFFFF 0%, #E5E7EB 100%);
+  background: #FFFFFF;
 }
 
 .silver-metallic-button--disabled,
@@ -272,7 +269,7 @@ const handleClick = (event) => {
 }
 
 .silver-metallic-button:active:not(:disabled) .silver-metallic-button__inner {
-  background: linear-gradient(180deg, #E5E7EB 0%, #FFFFFF 100%);
+  background: #FFFFFF;
 }
 </style>
 
