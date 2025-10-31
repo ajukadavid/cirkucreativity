@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@font-face {
+    font-family: 'MonumentExtended';
+    src: url('../assets/MonumentExtended-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'MonumentExtendedBold';
+    src: url('../assets/MonumentExtended-Ultrabold.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'InterFont';
+    src: url('../assets/Inter-VariableFont.ttf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'InterFontBold';
+    src: url('../assets/Inter-VariableFont.ttf') format('opentype');
+    font-weight: 600;
+    font-style: normal;
+  }
+  
+  
+
+body {
+  background-color: black;
+
+}
+
+.footer-font {
+  font-family: 'InterFontBold';
+}
+
+.title {
+  font-family: 'MonumentExtendedBold';
+  font-weight: 100;
+}
+
+#__nuxt {
+    min-height: 100vh; /* Ensure Nuxt container takes full height */
+  }
+
+  .bottom {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 800;
+    letter-spacing: 10px;
+}
+
+.leading {
+    font-family: 'MonumentExtended';
+}
+.footer {
+  font-family: 'InterFont';
+}
+
+/* Metallic Text Effect */
+.metallic-text {
+  color: #b7b7b7;
+  font-family: 'Playfair Display', serif;
+  font-size: 18vw;
+  font-weight: 400;
+  margin: 0;
+  position: relative;
+  text-shadow: -1px 0 1px #b3b3b3, 
+      0 1px 1px #b3b3b3, 
+      5px 5px 10px rgba(0, 0, 0, 0.4),
+      -5px -5px 10px rgba(0, 0, 0, 0.4);
+  text-transform: uppercase;
+  transform: scale(1);
+}
+
+.metallic-text::before {
+  content: attr(data-heading);
+  background: linear-gradient(to bottom, #b7b7b7 22%, #484848 24%, #b7b7b7 26%, #b7b7b7 27%, #d9d9d9 40%, #252525 78%);
+  left: 0;
+  position: absolute;
+  text-shadow: none;
+  top: 0;
+  z-index: 1;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Smaller metallic text for regular use */
+.metallic-text-sm {
+  color: #b7b7b7;
+  font-family: 'Playfair Display', serif;
+  font-size: 4rem;
+  font-weight: 400;
+  margin: 0;
+  position: relative;
+  text-shadow: -1px 0 1px #b3b3b3, 
+      0 1px 1px #b3b3b3, 
+      3px 3px 6px rgba(0, 0, 0, 0.4),
+      -3px -3px 6px rgba(0, 0, 0, 0.4);
+  text-transform: uppercase;
+  transform: scale(1);
+}
+
+.metallic-text-sm::before {
+  content: attr(data-heading);
+  background: linear-gradient(to bottom, #b7b7b7 22%, #484848 24%, #b7b7b7 26%, #b7b7b7 27%, #d9d9d9 40%, #252525 78%);
+  left: 0;
+  position: absolute;
+  text-shadow: none;
+  top: 0;
+  z-index: 1;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
