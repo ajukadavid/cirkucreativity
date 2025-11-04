@@ -4,11 +4,12 @@ import { defineStore } from 'pinia'
 export const useUserStore = defineStore('user', () => {
     const user = {
       name: '',
-      gender: '',
-      insta: '',
       email: '',
-      vid: '',
-      eventType: ''
+      phone: '',
+      eventType: '',
+      session: '',
+      designImage: null as File | null,
+      consent: false
     }
   
     return { user }
