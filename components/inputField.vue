@@ -40,7 +40,7 @@ watch(inputValue, (newValue) => {
   left: 0;
   right: 0;
   bottom: 0;
-  border: 2px solid #000000;
+  border: 2px solid #FFFFFF;
   border-radius: 0;
   pointer-events: none;
 }

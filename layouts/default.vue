@@ -17,6 +17,9 @@
             <source src="/images/hero_vid.mp4" type="video/mp4">
         </video>
         
+        <!-- Dark Overlay -->
+        <div class="fixed top-0 left-0 w-full h-full bg-black/50 z-[1]"></div>
+        
         <!-- Content overlay -->
         <div class="relative z-10 flex flex-col justify-between min-h-screen">
             <div v-if="$route.name !== 'about'" class="flex justify-between items-center p-5 sticky top-0">

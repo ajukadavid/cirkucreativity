@@ -1,71 +1,21 @@
 <template>
-    <div class="flex flex-col pb-10">
-        <div class="flex flex-col justify-center items-center space-y-5 mt-5 px-4">
-            <span class="footer text-center text-sm font-bold">ABOUT</span>
-            <span class="title text-4xl">CIRKU</span>
+    <div class="flex flex-col min-h-screen pb-10">
+        <div class="flex flex-col justify-center items-center space-y-5 mt-5 px-4 flex-grow">
+            <span class="footer text-center text-base font-bold">ABOUT</span>
+            <span class="title text-8xl">CIRKU</span>
             <img src="/images/star2.png" class="h-8 absolute left-10 top-20"/>
 
-            <div class="flex flex-col items-center space-y-6 mt-12 max-w-3xl px-4">
-                <div class="title mb-4 flex flex-col text-center text-2xl">
-                    <span>Your Circle of creation</span>
-                </div>
-                
+            <div class="flex flex-col items-center justify-center space-y-6 mt-12 max-w-3xl px-4 mx-auto">
                 <div class="text-center text-w space-y-5 max-w-2xl">
-                    <p class="text-base md:text-lg leading-relaxed">
-                        Cirku is a DIY creative experience designed to bring people together through art, craft, and self-expression. Guests create Texture Art, Rugs, and wooden works with epoxy while enjoying music, drinks, and community vibes.
+                    <p class="text-base md:text-lg leading-relaxed text-center">
+                        CIRKU is a DIY creative experience that brings people together through art, craft, and self-expression.
                     </p>
-                    <p class="text-base md:text-lg leading-relaxed">
-                        It blends the energy of a social hangout with the joy of making something by hand.
+                    <p class="text-base md:text-lg leading-relaxed text-center">
+                        Guests explore Texture Art, Rug Tufting, and Wood & Resin creations while enjoying music, drinks, and community energy.
                     </p>
-                </div>
-            </div>
-
-            <div class="flex flex-col items-center space-y-6 mt-12 max-w-3xl px-4">
-                <div class="title mb-5 flex flex-col text-center text-xl md:text-2xl">
-                    <span>Core Activities</span>
-                </div>
-                <div class="text-center space-y-3 text-base md:text-lg">
-                    <p>• Texture Art</p>
-                    <p>• Rug Tufting</p>
-                    <p>• Wood Works with Epoxy</p>
-                </div>
-            </div>
-
-            <div class="flex flex-col items-center space-y-6 mt-12 max-w-3xl px-4">
-                <div class="title mb-5 flex flex-col text-center text-xl md:text-2xl">
-                    <span>Why Cirku?</span>
-                </div>
-                <div class="text-left space-y-4 text-base md:text-lg max-w-xl w-full">
-                    <p><span class="font-semibold">• Unique:</span> First-of-its-kind creative lounge experience in Lagos.</p>
-                    <p><span class="font-semibold">• Social:</span> Perfect for content creation & social sharing.</p>
-                    <p><span class="font-semibold">• Take-Home Value:</span> Every guest leaves with something they made.</p>
-                    <p><span class="font-semibold">• Flexible:</span> Works for both day & night audiences.</p>
-                    <p><span class="font-semibold">• Club/Lounge Benefit:</span> Increases foot traffic, builds brand reputation.</p>
-                </div>
-            </div>
-
-            <div class="flex flex-col items-center space-y-6 mt-12 max-w-3xl px-4">
-                <div class="title mb-5 flex flex-col text-center text-xl md:text-2xl">
-                    <span>Event Details</span>
-                </div>
-                <div class="text-center space-y-5 text-base md:text-lg max-w-xl">
-                    <p class="font-semibold text-lg md:text-xl">Date: November 1, 2025</p>
-                    <div class="space-y-3 mt-6">
-                        <p class="font-semibold text-lg md:text-xl">Sessions:</p>
-                        <div class="space-y-2">
-                            <p>• Session 1 → 12–6 PM</p>
-                            <p>• Session 2 → 6–10 PM</p>
-                        </div>
-                    </div>
-                    <div class="space-y-3 mt-6">
-                        <p class="font-semibold text-lg md:text-xl">Capacity (per session):</p>
-                        <div class="space-y-2">
-                            <p>• Texture Art: 20 guests</p>
-                            <p>• Wood works with epoxy: 20 guests</p>
-                            <p>• Rug Tufting: 10 guests</p>
-                        </div>
-                        <p class="mt-4 font-semibold"><span>Total:</span> 50 guests per session / 100 in one day</p>
-                    </div>
+                    <p class="text-base md:text-lg leading-relaxed text-center">
+                        It blends the fun of a social hangout with the joy of making something by hand.
+                    </p>
                 </div>
             </div>
 

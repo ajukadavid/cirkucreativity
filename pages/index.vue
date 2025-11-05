@@ -24,10 +24,10 @@ const workshops = [
   {
     id: 'texture-art',
     name: 'Texture Art',
-    capacity: '20 guests',
+    capacity: '15 guests',
     price: 100000,
     description: 'Explore the world of texture and dimension. Create stunning textured art pieces using plaster and various techniques.',
-    image: '/images/chess.jpeg'
+    image: '/images/resin.jpeg'
   },
   {
     id: 'resin-art',
@@ -41,9 +41,9 @@ const workshops = [
         'The team will prepare the molds and pigments ahead of time.'
       ],
       projectChoices: [
-        'Resin Chess Board',
-        'Ocean Wave Clock',
-        'Resin Wall Art'
+        { name: 'Resin Chess Board', image: '/images/chess.jpeg' },
+        { name: 'Ocean Wave Clock', image: '/images/resin2.jpeg' },
+        { name: 'Resin Wall Art', image: '/images/resin3.jpeg' }
       ],
       included: [
         'Tools & materials: resin, pigments, molds, gloves, masks, finishing supplies',
@@ -57,7 +57,7 @@ const workshops = [
         capacity: '15 participants per session'
       }
     },
-    image: '/images/resin.jpeg'
+    image: '/images/chess.jpeg'
   }
 ]
 
@@ -96,6 +96,12 @@ const removeImage = () => {
   if (fileInputRef.value) {
     fileInputRef.value.value = ''
   }
+}
+
+const handleImageError = (event: Event, projectName: string) => {
+  const target = event.target as HTMLImageElement
+  const encodedName = encodeURIComponent(projectName)
+  target.src = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Crect fill='%231a1a1a' width='400' height='400'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dominant-baseline='middle' fill='%23ffffff' font-size='16' font-family='Arial'%3E${encodedName}%3C/text%3E%3C/svg%3E`
 }
 
 const validateForm = () => {
@@ -175,34 +181,110 @@ const handlePayment = async () => {
       }
     }
     
-    // Save user data to database
-    const { error } = await supabase
+    // Generate unique payment reference
+    const paymentReference = `CIRKU_${Date.now()}_${Math.random().toString(36).substring(7)}`
+    
+    // Save user data to database first (with pending status)
+    const { data: userData, error: insertError } = await supabase
       .from('users')
       .insert({
         name: store.user.name,
         phone: store.user.phone,
         email: store.user.email,
-        eventType: store.user.eventType,
+        event_type: store.user.eventType,
         session: store.user.session,
-        designImage: imageUrl,
+        design_image: imageUrl,
         consent: store.user.consent,
         amount: 100000,
-        status: 'pending_payment'
+        status: 'pending_payment',
+        payment_reference: paymentReference
       })
+      .select()
+      .single()
     
-    if (error) {
-      console.error('Error saving data:', error)
+    if (insertError) {
+      console.error('Error saving data:', insertError)
       validationErrors.value = ['Error saving your information. Please try again.']
       isLoading.value = false
       return
     }
     
-    // TODO: Integrate Paystack or Flutterwave payment here
-    // Initialize payment gateway with amount: 100000
-    // After successful payment, update status to 'paid' and send confirmation
+    // Check if Monnify SDK is loaded
+    if (typeof window === 'undefined' || !(window as any).MonnifySDK) {
+      validationErrors.value = ['Payment gateway is loading. Please try again in a moment.']
+      isLoading.value = false
+      return
+    }
     
-    // For now, simulate payment success and redirect
-    router.push('/final')
+    // Initialize Monnify payment
+    const MonnifySDK = (window as any).MonnifySDK
+    
+    MonnifySDK.initialize({
+      amount: 100000,
+      currency: "NGN",
+      reference: paymentReference,
+      customerFullName: store.user.name,
+      customerEmail: store.user.email,
+      apiKey: config.public.monnifyApiKey,
+      contractCode: config.public.monnifyContractCode,
+      paymentDescription: `CIRKU Workshop Booking - ${store.user.eventType}`,
+      metadata: {
+        userId: userData.id,
+        eventType: store.user.eventType,
+        session: store.user.session,
+      },
+      onLoadStart: () => {
+        console.log("Monnify loading started");
+      },
+      onLoadComplete: () => {
+        console.log("Monnify SDK is ready");
+        isLoading.value = false
+      },
+      onComplete: async (response: any) => {
+        console.log("Payment completed:", response)
+        
+        try {
+          // Verify payment status and update database
+          if (response.paymentStatus === 'PAID' && response.completed) {
+            // Update user record with payment details
+            const { error: updateError } = await supabase
+              .from('users')
+              .update({
+                status: 'paid',
+                payment_reference: response.paymentReference,
+                transaction_reference: response.transactionReference,
+                payment_method: response.paymentMethod,
+                paid_at: new Date().toISOString()
+              })
+              .eq('id', userData.id)
+            
+            if (updateError) {
+              console.error('Error updating payment status:', updateError)
+            }
+            
+            // Redirect to success page
+            router.push('/final')
+          } else {
+            validationErrors.value = ['Payment was not completed successfully. Please try again.']
+          }
+        } catch (error) {
+          console.error('Error processing payment response:', error)
+          validationErrors.value = ['Error processing payment. Please contact support.']
+        }
+      },
+      onClose: (data: any) => {
+        console.log("Payment modal closed:", data)
+        isLoading.value = false
+        
+        // If user cancelled, update status
+        if (data && data.paymentStatus === 'USER_CANCELLED') {
+          supabase
+            .from('users')
+            .update({ status: 'cancelled' })
+            .eq('id', userData.id)
+        }
+      }
+    })
     
   } catch (error) {
     console.error('Error processing payment:', error)
@@ -253,10 +335,10 @@ const clearValidationErrors = () => {
           :key="workshop.id"
           class="scroll-mt-24"
         >
-          <div class="flex flex-col md:flex-row items-center gap-8 md:gap-12">
-            <!-- Image -->
-            <div class="w-full md:w-1/2">
-              <div class="aspect-[4/3] bg-gray-800 border-2 border-black flex items-center justify-center">
+          <div class="flex flex-col md:flex-row items-center gap-8 md:gap-12" :class="{ 'md:flex-col': workshop.id === 'resin-art' }">
+            <!-- Image (Hidden for resin-art) -->
+            <div v-if="workshop.id !== 'resin-art'" class="w-full md:w-1/2">
+              <div class="aspect-[4/3] bg-gray-800 border-2 border-white flex items-center justify-center">
                 <img 
                   :src="workshop.image" 
                   :alt="workshop.name"
@@ -267,7 +349,7 @@ const clearValidationErrors = () => {
             </div>
 
             <!-- Content -->
-            <div class="w-full md:w-1/2 space-y-6">
+            <div class="w-full space-y-6" :class="{ 'md:w-full': workshop.id === 'resin-art', 'md:w-1/2': workshop.id !== 'resin-art' }">
               <div class="title text-3xl md:text-4xl">
                 <span>{{ workshop.name }}</span>
               </div>
@@ -284,11 +366,25 @@ const clearValidationErrors = () => {
                     </ul>
                   </div>
                   
-                  <div>
-                    <p class="font-semibold mb-2">Project choices:</p>
-                    <ul class="list-disc list-inside space-y-1 ml-2">
-                      <li v-for="(item, idx) in workshop.details.projectChoices" :key="idx">{{ item }}</li>
-                    </ul>
+                  <div class="mt-8">
+                    <p class="font-semibold mb-6 text-xl md:text-2xl text-center">Project choices:</p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mt-6">
+                      <div 
+                        v-for="(project, idx) in workshop.details.projectChoices" 
+                        :key="idx"
+                        class="flex flex-col items-center space-y-3"
+                      >
+                        <div class="w-full aspect-square bg-gray-800 border-2 border-white overflow-hidden">
+                          <img 
+                            :src="project.image" 
+                            :alt="project.name"
+                            class="w-full h-full object-cover"
+                            @error="(e) => handleImageError(e, project.name)"
+                          />
+                        </div>
+                        <p class="text-base md:text-lg text-center font-semibold">{{ project.name }}</p>
+                      </div>
+                    </div>
                   </div>
                   
                   <div>
@@ -386,7 +482,7 @@ const clearValidationErrors = () => {
             <label class="block mb-2 text-sm font-semibold">Workshop Type</label>
             <select 
               v-model="store.user.eventType"
-              class="event-type-select w-full py-3 px-4 border-2 border-black rounded-none bg-transparent text-white text-base font-['InterFont'] cursor-pointer outline-none pr-10"
+              class="event-type-select w-full py-3 px-4 border-2 border-white rounded-none bg-transparent text-white text-base font-['InterFont'] cursor-pointer outline-none pr-10"
               @change="clearValidationErrors"
             >
               <option value="" disabled>Select a workshop</option>
@@ -405,7 +501,7 @@ const clearValidationErrors = () => {
             <label class="block mb-2 text-sm font-semibold">Preferred Session</label>
             <select 
               v-model="store.user.session"
-              class="event-type-select w-full py-3 px-4 border-2 border-black rounded-none bg-transparent text-white text-base font-['InterFont'] cursor-pointer outline-none pr-10"
+              class="event-type-select w-full py-3 px-4 border-2 border-white rounded-none bg-transparent text-white text-base font-['InterFont'] cursor-pointer outline-none pr-10"
               @change="clearValidationErrors"
             >
               <option value="" disabled>Select a session</option>
@@ -433,7 +529,7 @@ const clearValidationErrors = () => {
               />
               <label 
                 for="design-upload"
-                class="block w-full py-3 px-4 border-2 border-black rounded-none bg-transparent text-white cursor-pointer text-center transition-all hover:bg-white/10"
+                class="block w-full py-3 px-4 border-2 border-white rounded-none bg-transparent text-white cursor-pointer text-center transition-all hover:bg-white/10"
               >
                 <span v-if="!previewImage">Click to upload image</span>
                 <span v-else class="flex items-center space-x-2">
@@ -442,7 +538,7 @@ const clearValidationErrors = () => {
                 </span>
               </label>
               <div v-if="previewImage" class="mt-2">
-                <img :src="previewImage" alt="Preview" class="max-w-full max-h-48 object-contain border-2 border-black" />
+                <img :src="previewImage" alt="Preview" class="max-w-full max-h-48 object-contain border-2 border-white" />
               </div>
             </div>
           </div>
@@ -454,7 +550,7 @@ const clearValidationErrors = () => {
                 type="checkbox"
                 v-model="store.user.consent"
                 @change="clearValidationErrors"
-                class="checkbox-custom mt-1 w-5 h-5 cursor-pointer border-2 border-black rounded-none bg-transparent relative"
+                class="checkbox-custom mt-1 w-5 h-5 cursor-pointer border-2 border-white rounded-none bg-transparent relative"
               />
               <span class="text-sm">
                 I understand that all bookings are final — no refunds and no rescheduling.
@@ -463,7 +559,7 @@ const clearValidationErrors = () => {
           </div>
 
           <!-- Payment Summary -->
-          <div class="w-full border-2 border-black p-6 bg-transparent space-y-3 mt-6">
+          <div class="w-full border-2 border-white p-6 bg-transparent space-y-3 mt-6">
             <div class="flex justify-between items-center">
               <span class="font-semibold">Total Amount:</span>
               <span class="text-2xl font-bold">{{ formatPrice(100000) }}</span>
@@ -486,7 +582,7 @@ const clearValidationErrors = () => {
             <p class="font-semibold mb-2">Location:</p>
             <p>CIRKU Studio<br />2C Okotie Eboh Street, Ikoyi, Lagos</p>
           </div>
-          <div class="border-2 border-black p-4 bg-transparent">
+          <div class="border-2 border-white p-4 bg-transparent">
             <p class="font-semibold mb-2">Policy:</p>
             <p>All bookings are final. No refunds. No rescheduling.</p>
           </div>
@@ -520,7 +616,7 @@ const clearValidationErrors = () => {
 }
 
 .checkbox-custom:checked {
-  background: #000000;
+  background: #FFFFFF;
 }
 
 .checkbox-custom:checked::after {
@@ -529,7 +625,7 @@ const clearValidationErrors = () => {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: #FFFFFF;
+  color: #000000;
   font-size: 14px;
   font-weight: bold;
 }

@@ -73,7 +73,7 @@ const getEventTypeLabel = () => {
             </div>
 
             <!-- Reservation Summary -->
-            <div class="w-full border-2 border-black p-6 bg-white space-y-3">
+            <div class="w-full border-2 border-white p-6 bg-transparent space-y-3">
                 <div>
                     <span class="font-semibold">Event Type:</span>
                     <span class="ml-2">{{ getEventTypeLabel() }}</span>
