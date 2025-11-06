@@ -13,10 +13,10 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      supabaseUrl: process.env.SUPABASE_URL || 'https://feavdvsmfihynwtgxmxr.supabase.co',
-      supabaseAnonKey: process.env.SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZlYXZkdnNtZmloeW53dGd4bXhyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTc1ODg5MzMsImV4cCI6MjA3MzE2NDkzM30.BKFreBIPiyaoB_t8MPfkMHM2o32oRqytlWd-L1-2qr0',
-      monnifyApiKey: process.env.MONNIFY_API_KEY || '',
-      monnifyContractCode: process.env.MONNIFY_CONTRACT_CODE || ''
+      supabaseUrl: process.env.SUPABASE_URL,
+      supabaseAnonKey: process.env.SUPABASE_ANON_KEY,
+      monnifyApiKey: process.env.MONNIFY_API_KEY ,
+      monnifyContractCode: process.env.MONNIFY_CONTRACT_CODE,
     }
   },
 
